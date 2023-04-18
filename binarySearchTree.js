@@ -24,9 +24,15 @@ function tree(root) {
                     }
                     
                     if(num < root.data){
+                        if(root.left == null){
+                            root.left = node(num,null,null);
+                        }
                         root = root.left;
                         this.insert(num);
                     } else if (num > root.data){
+                        if(root.right == null){
+                            root.right = node(num,null,null);
+                        }
                          root = root.right
                         this.insert(num);
                 }
