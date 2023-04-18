@@ -15,62 +15,6 @@ function node(storedData,storedLeft,storedRight){
         right:storedRight
     }
 }
-
-function tree(root) {
-        return{
-            insert(num){
-                    if(root == null){
-                        root = node(num);
-                    } else if(num == root.data){
-                        return;
-                    }
-                    
-                    if(num < root.data){
-                        if(root.left == null){
-                            root.left = node(num,null,null);
-                        }
-                        root = root.left;
-                        this.insert(num);
-                    } else if (num > root.data){
-                        if(root.right == null){
-                            root.right = node(num,null,null);
-                        }
-                         root = root.right
-                        this.insert(num);
-                }
-                return root;
-            },
-            delete(num){
-                if(root == null){
-                    return root;
-                }else if(num < root.data){
-                    root =root.left;
-                    this.delete(num);
-                }else if(num > root.data){
-                    root = root.right;
-                    this.delete(num);
-                } else{
-                    if(root.left ==null && root.right ==null){
-                        root = null;
-                        console.log(root);
-                        return root;
-                    } else if(root.left == null){
-                        tempRoot = root.right;
-                        root.right = null;
-                        root = tempRoot;
-                        return root;
-                    } else if(root.right == null){
-                        tempRoot = root.left;
-                        root.left = null;
-                        root = tempRoot;
-                        return root;
-                    }
-                }
-                return root;
-            },
-
-}
-}
 function buildTree(array){
     let start =0;
     let end = array.length -1;
@@ -82,10 +26,28 @@ function buildTree(array){
   return rootNode;
 }
 
+class Tree{
+    constructor(array){
+       this.root = buildTree(array);
+    }
+    insert(num, currentNode = this.root){
+         if (currentNode == null){
+            return node(num); 
+         } else if (currentNode.data == num) {
+             return;
+         }
+         if(num < currentNode.data){
+             currentNode.left = this.insert(num,currentNode.right);
+         } else{
+             currentNode.right = this.insert(num,currentNode.right);
+         }
+         return currentNode;
+    }
+    
+}
 
-let mainTree = buildTree(numbers);
-tree(mainTree).insert(8);
-tree(mainTree).insert(2);
-tree(mainTree).insert(22);
-tree(mainTree).delete(22);
-console.log(mainTree.right.right)
+
+let myTree = new Tree(numbers);
+console.log(myTree.root)
+myTree.insert(12)
+console.log(myTree.root)
