@@ -21,6 +21,8 @@ function tree(root) {
             insert(num){
                     if(root == null){
                         root = node(num);
+                    } else if(num == root.data){
+                        return;
                     }
                     
                     if(num < root.data){
@@ -35,6 +37,34 @@ function tree(root) {
                         }
                          root = root.right
                         this.insert(num);
+                }
+                return root;
+            },
+            delete(num){
+                if(root == null){
+                    return root;
+                }else if(num < root.data){
+                    root =root.left;
+                    this.delete(num);
+                }else if(num > root.data){
+                    root = root.right;
+                    this.delete(num);
+                } else{
+                    if(root.left ==null && root.right ==null){
+                        root = null;
+                        console.log(root);
+                        return root;
+                    } else if(root.left == null){
+                        tempRoot = root.right;
+                        root.right = null;
+                        root = tempRoot;
+                        return root;
+                    } else if(root.right == null){
+                        tempRoot = root.left;
+                        root.left = null;
+                        root = tempRoot;
+                        return root;
+                    }
                 }
                 return root;
             },
@@ -55,4 +85,7 @@ function buildTree(array){
 
 let mainTree = buildTree(numbers);
 tree(mainTree).insert(8);
-console.log(mainTree);
+tree(mainTree).insert(2);
+tree(mainTree).insert(22);
+tree(mainTree).delete(22);
+console.log(mainTree.right.right)
