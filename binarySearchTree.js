@@ -104,29 +104,34 @@ class Tree{
             return;
         }
         if(func == null){
-            func = function getNumbers(){
+            func = function getNumbers(current){
+               return current.data
             }
         }
         let queue =[];
         queue.push(this.root);
         let arrayOfValues = [];
-                while(queue != []){
-                    console.log(queue)
-                    let current = queue.shift();
-                    if (current == undefined){
+        function recur(){
+                if(queue != []){
+                   let current = queue.shift();
+                   if (current == undefined){
                         return;
                     }
-                    console.log(current.data);
-                    arrayOfValues.push(current.data);
-                    if(current.left != null){
+                    arrayOfValues.push(func(current));
+                    
+                     if(current.left != null){
                         queue.push(current.left)
                     }
                     if(current.right != null){
                         queue.push(current.right)
                     }
-                    
+                    recur()
+                }else{
+                    return;
                 }
-                console.log("we made it here")
+        }
+        recur();
+        console.log(arrayOfValues);
         }
 }
 
