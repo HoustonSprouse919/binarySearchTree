@@ -57,7 +57,7 @@ class Tree{
             //first works
             if(currentNode.left == null && currentNode.right == null){
                 return currentNode.data = null;
-                //wont work :(;
+                //works now;
         } else if(currentNode.left != null && currentNode.right != null){
             let sucessor = currentNode.right;
             this.delete(sucessor.data);
@@ -72,8 +72,14 @@ class Tree{
             } else{
                 child = currentNode.right
             }
-             delete(child.data, currentNode);
-            currentNode = child;
+            let newData = child.data;
+            let newLeft = child.left;
+            let newRight = child.right;
+            this.delete(child.data);
+            currentNode.data=newData;
+            currentNode.left = newLeft;
+            currentNode.right = newRight;
+            return currentNode;
         }
     }
     return currentNode;
@@ -85,5 +91,5 @@ let myTree = new Tree(numbers);
 myTree.insert(8);
 myTree.insert(9);
 myTree.insert(12);
-myTree.delete(6);
-console.log(myTree.root);
+myTree.delete(9);
+console.log(myTree.root.right.right);
