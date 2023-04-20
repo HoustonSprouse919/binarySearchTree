@@ -84,6 +84,21 @@ class Tree{
     }
     return currentNode;
     }
+    find(num, currentNode = this.root){
+        let target;
+         if (currentNode.data == null){
+            return "node not found"; 
+    }
+       if(num < currentNode.data){
+           return this.find(num, currentNode.left);
+       } else if(num > currentNode.data){
+           return this.find(num, currentNode.right);
+       }
+        else if(num == currentNode.data){
+            target = currentNode;
+    }
+    return target;
+    }
 }
 
 
@@ -92,4 +107,4 @@ myTree.insert(8);
 myTree.insert(9);
 myTree.insert(12);
 myTree.delete(9);
-console.log(myTree.root.right.right);
+console.log(myTree.find(5));
