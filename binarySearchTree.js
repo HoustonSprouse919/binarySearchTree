@@ -1,12 +1,12 @@
 let numbers = [1,2,3,4,5,6,7];
 function node(storedData,storedLeft,storedRight){
-    if(storedData === undefined){
+    if(storedData == undefined){
         storedData = null;
     }
-        if(storedLeft === undefined){
+        if(storedLeft == undefined){
         storedleft = null;
     }
-        if(storedRight === undefined){
+        if(storedRight == undefined){
         storedRight = null;
     }
     return{
@@ -15,6 +15,7 @@ function node(storedData,storedLeft,storedRight){
         right:storedRight
     }
 }
+
 function buildTree(array){
     let start =0;
     let end = array.length -1;
@@ -32,7 +33,7 @@ class Tree{
     }
     insert(num, currentNode = this.root){
          if (currentNode == null){
-            return node(num); 
+            return node(num, null, null); 
          } else if (currentNode.data == num) {
              return;
          }
@@ -43,11 +44,46 @@ class Tree{
          }
          return currentNode;
     }
-    
+    delete(num, currentNode = this.root){
+        if (currentNode == null){
+            return currentNode; 
+    }
+       if(num < currentNode.data){
+           this.delete(num, currentNode.left);
+       } else if(num > currentNode.data){
+           this.delete(num, currentNode.right);
+       }
+        else{
+            //first works
+            if(currentNode.left == null && currentNode.right == null){
+                return currentNode.data = null;
+                //wont work :(;
+        } else if(currentNode.left != null && currentNode.right != null){
+            let sucessor = currentNode.right;
+            this.delete(sucessor.data);
+            currentNode.data=sucessor.data;
+            currentNode.left = sucessor.left;
+            currentNode.right = sucessor.right;
+            return currentNode;
+        } else{
+            let child;
+            if(currentNode.left != null){
+                child = currentNode.left
+            } else{
+                child = currentNode.right
+            }
+             delete(child.data, currentNode);
+            currentNode = child;
+        }
+    }
+    return currentNode;
+    }
 }
 
 
 let myTree = new Tree(numbers);
-console.log(myTree.root)
-myTree.insert(12)
-console.log(myTree.root)
+myTree.insert(8);
+myTree.insert(9);
+myTree.insert(12);
+myTree.delete(6);
+console.log(myTree.root);
