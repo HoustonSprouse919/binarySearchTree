@@ -99,6 +99,35 @@ class Tree{
     }
     return target;
     }
+    levelOrder(func=null, currentNode = this.root){
+        if(currentNode == null){
+            return;
+        }
+        if(func == null){
+            func = function getNumbers(){
+            }
+        }
+        let queue =[];
+        queue.push(this.root);
+        let arrayOfValues = [];
+                while(queue != []){
+                    console.log(queue)
+                    let current = queue.shift();
+                    if (current == undefined){
+                        return;
+                    }
+                    console.log(current.data);
+                    arrayOfValues.push(current.data);
+                    if(current.left != null){
+                        queue.push(current.left)
+                    }
+                    if(current.right != null){
+                        queue.push(current.right)
+                    }
+                    
+                }
+                console.log("we made it here")
+        }
 }
 
 
@@ -107,4 +136,4 @@ myTree.insert(8);
 myTree.insert(9);
 myTree.insert(12);
 myTree.delete(9);
-console.log(myTree.find(5));
+myTree.levelOrder();
