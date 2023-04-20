@@ -141,4 +141,4 @@ myTree.insert(8);
 myTree.insert(9);
 myTree.insert(12);
 myTree.delete(9);
-myTree.levelOrder();
+myTree.levelOrder(); 
