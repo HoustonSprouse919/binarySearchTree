@@ -131,7 +131,61 @@ class Tree{
                 }
         }
         recur();
-        console.log(arrayOfValues);
+        return arrayOfValues;
+        }
+        
+        
+        
+        inorder(func=null, currentNode = this.root){
+                    if(currentNode == null){
+            return;
+        }
+        if(func == null){
+            func = function getNumbers(current){
+               return current.data
+            }
+        } 
+
+        let arrayOfValues = [];
+        function recur(current){
+                   if (current == undefined){
+                        return;
+                    }
+                     if(current.left != null){
+                        recur(current.left)
+                    } 
+                    if(current.right != null){
+                        recur(current.right)
+                    }
+                       return arrayOfValues.push(current.data);
+                }
+                recur(this.root);
+        return arrayOfValues
+        }
+        
+        
+        
+        
+        
+        preorder(func=null, currentNode = this.root){
+                    if(currentNode == null){
+            return;
+        }
+        if(func == null){
+            func = function getNumbers(current){
+               return current.data
+            }
+        }
+        }
+        postorder(func=null, currentNode = this.root){
+                    if(currentNode == null){
+            return;
+        }
+        if(func == null){
+            func = function getNumbers(current){
+               return current.data
+            }
+        }
         }
 }
 
@@ -141,4 +195,4 @@ myTree.insert(8);
 myTree.insert(9);
 myTree.insert(12);
 myTree.delete(9);
-myTree.levelOrder(); 
+myTree.inorder(); 
