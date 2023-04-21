@@ -176,7 +176,24 @@ class Tree{
                return current.data
             }
         }
+         let arrayOfValues = [];
+        function recur(current){
+                   if (current == undefined){
+                        return;
+                    }
+                    arrayOfValues.push(current.data);
+                     if(current.left != null){
+                        recur(current.left)
+                    } 
+                    if(current.right != null){
+                        recur(current.right)
+                    }
+                }
+                recur(this.root);
+        return arrayOfValues
         }
+        
+        
         postorder(func=null, currentNode = this.root){
                     if(currentNode == null){
             return;
@@ -186,6 +203,8 @@ class Tree{
                return current.data
             }
         }
+        
+        
         }
 }
 
@@ -195,4 +214,5 @@ myTree.insert(8);
 myTree.insert(9);
 myTree.insert(12);
 myTree.delete(9);
-myTree.inorder(); 
+console.log(myTree.inorder()); 
+console.log(myTree.preorder()); 
