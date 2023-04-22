@@ -234,8 +234,17 @@ class Tree{
         return arrayOfValues
         
         }
-        height(){
-            console.log("hiii")
+        height(num, current = this.root){
+            let targetNode = this.find(num)
+            function recur(currentNode = targetNode){
+            if(currentNode== null || currentNode.data == null){
+                return 0;
+            } 
+                let leftHeight = recur(currentNode.left);
+                let rightHeight = recur(currentNode.right);
+                return Math.max(leftHeight, rightHeight) +1;
+            }
+            return(recur()-1)
         }
         
         
@@ -257,8 +266,8 @@ class Tree{
     }
     return;
     }
-    recur(number, rootNode)
-    console.log(depthNumber)
+    recur(number, rootNode);
+    return depthNumber;
         }
 }
 
@@ -273,4 +282,6 @@ myTree.delete(9);
 console.log(myTree.inorder()); 
 console.log(myTree.preorder()); 
 console.log(myTree.postorder());
-myTree.depth(12);
+console.log(myTree.height(6));
+console.log(myTree.depth(12));
+prettyPrint(myTree.root);
