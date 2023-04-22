@@ -16,6 +16,19 @@ function node(storedData,storedLeft,storedRight){
     }
 }
 
+const prettyPrint = (node, prefix = '', isLeft = true) => {
+  if (node === null) {
+     return;
+  }
+  if (node.right !== null) {
+    prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+  }
+  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+  if (node.left !== null) {
+    prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+  }
+}
+
 function buildTree(array){
     let start =0;
     let end = array.length -1;
@@ -221,7 +234,35 @@ class Tree{
         return arrayOfValues
         
         }
+        height(){
+            console.log("hiii")
+        }
+        
+        
+        depth(number, rootNode = this.root){
+            let depthNumber =0;
+        function recur(num, currentNode){
+         if (currentNode.data == null){
+            return "node not found"; 
+    }
+       if(num < currentNode.data){
+           depthNumber++;
+           return recur(num, currentNode.left);
+       } else if(num > currentNode.data){
+           depthNumber++;
+           return recur(num, currentNode.right);
+       }
+        else if(num == currentNode.data){
+            return;
+    }
+    return;
+    }
+    recur(number, rootNode)
+    console.log(depthNumber)
+        }
 }
+
+
 
 
 let myTree = new Tree(numbers);
@@ -232,3 +273,4 @@ myTree.delete(9);
 console.log(myTree.inorder()); 
 console.log(myTree.preorder()); 
 console.log(myTree.postorder());
+myTree.depth(12);
