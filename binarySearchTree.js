@@ -306,23 +306,15 @@ function driver(){
    let tree = new Tree(uniqueChars);
    console.log("The tree looks like this: ");
    prettyPrint(tree.root);
-   console.log(tree.isBalanced());
-}
-/*driver();*/
-let randomNumbers = [24,  5, 18, 30, 21,  5,
-   9, 28,  3, 14,  2, 25,
-  18, 15, 23];
-  randomNumbers = randomNumbers.sort(function(a, b){return a-b})
-let unique = [...new Set(randomNumbers)];
-console.log(unique);
-let tree = new Tree(unique);
-console.log("The tree looks like this: ");
-   prettyPrint(tree.root);
-   console.log(tree.isBalanced());
-   console.log(tree.inorder())
-   console.log(tree.preorder())
-   console.log(tree.postorder())
-   console.log("now we are going to unbalance the tree")
+   if(tree.isBalanced() == true){
+       console.log("the tree is balanced")
+   } else{
+       console.log("the tree is not balanced")
+   }
+   console.log("the elements in order level are: " + tree.inorder())
+   console.log("the elements in preorder level are: " + tree.preorder())
+   console.log("the elements in postorder level are: " + tree.postorder())
+   console.log("now we are going to add some numbers to unbalance the tree");
    tree.insert(175);
    tree.insert(160);
    tree.insert(155);
@@ -330,21 +322,18 @@ console.log("The tree looks like this: ");
    tree.insert(166);
    tree.insert(258);
    tree.insert(157);
-      prettyPrint(tree.root);
-         console.log(tree.isBalanced());
-       prettyPrint(tree.rebalance());
-   
+   prettyPrint(tree.root);
+    if(tree.isBalanced() == true){
+       console.log("the tree is balanced");
+   } else{
+       console.log("the tree is not balanced");
+   }
+   console.log("now we rebalance it");
+ tree.rebalance();
+ prettyPrint(tree.root);
+ console.log("the elements in order level are: " + tree.inorder())
+   console.log("the elements in preorder level are: " + tree.preorder())
+   console.log("the elements in postorder level are: " + tree.postorder())
+}
 
-let myTree = new Tree(numbers);
-myTree.insert(8);
-myTree.insert(9);
-myTree.insert(12);
-myTree.delete(9);
-console.log(myTree.inorder()); 
-console.log(myTree.preorder()); 
-console.log(myTree.postorder());
-console.log(myTree.height(6));
-console.log(myTree.depth(12));
-console.log(myTree.isBalanced());
-prettyPrint(myTree.root);
-prettyPrint(myTree.rebalance());
+driver();
