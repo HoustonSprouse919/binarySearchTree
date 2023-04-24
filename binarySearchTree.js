@@ -1,4 +1,13 @@
 let numbers = [1,2,3,4,5,6,7];
+
+function randomArray(length, max){
+    let array = [];
+    for(let i = 0; i<length; i++){
+        array.push(Math.round(Math.random() * max));
+    }
+    return array;
+}
+
 function node(storedData,storedLeft,storedRight){
     if(storedData == undefined){
         storedData = null;
@@ -47,11 +56,11 @@ class Tree{
     insert(num, currentNode = this.root){
          if (currentNode == null){
             return node(num, null, null); 
-         } else if (currentNode.data == num) {
+         } else if (currentNode.data === num) {
              return;
          }
          if(num < currentNode.data){
-             currentNode.left = this.insert(num,currentNode.right);
+             currentNode.left = this.insert(num,currentNode.left);
          } else{
              currentNode.right = this.insert(num,currentNode.right);
          }
@@ -273,6 +282,7 @@ class Tree{
         
         isBalanced(rootNode = this.root){
             let heightLeft = this.height(rootNode.left.data);
+
             let heightRight = this.height(rootNode.right.data);
             if(heightLeft == heightRight){
                 return true
@@ -287,8 +297,43 @@ class Tree{
         }
 }
 
-
-
+function driver(){
+   let randomNumbers = randomArray(15,33); 
+   randomNumbers = randomNumbers.sort(function(a, b){return a-b})
+   console.log("So we have a random array that consist of:");
+   console.log(randomNumbers);
+      let uniqueChars = [...new Set(randomNumbers)];
+   let tree = new Tree(uniqueChars);
+   console.log("The tree looks like this: ");
+   prettyPrint(tree.root);
+   console.log(tree.isBalanced());
+}
+/*driver();*/
+let randomNumbers = [24,  5, 18, 30, 21,  5,
+   9, 28,  3, 14,  2, 25,
+  18, 15, 23];
+  randomNumbers = randomNumbers.sort(function(a, b){return a-b})
+let unique = [...new Set(randomNumbers)];
+console.log(unique);
+let tree = new Tree(unique);
+console.log("The tree looks like this: ");
+   prettyPrint(tree.root);
+   console.log(tree.isBalanced());
+   console.log(tree.inorder())
+   console.log(tree.preorder())
+   console.log(tree.postorder())
+   console.log("now we are going to unbalance the tree")
+   tree.insert(175);
+   tree.insert(160);
+   tree.insert(155);
+   tree.insert(167);
+   tree.insert(166);
+   tree.insert(258);
+   tree.insert(157);
+      prettyPrint(tree.root);
+         console.log(tree.isBalanced());
+       prettyPrint(tree.rebalance());
+   
 
 let myTree = new Tree(numbers);
 myTree.insert(8);
