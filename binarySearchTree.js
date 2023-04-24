@@ -269,6 +269,22 @@ class Tree{
     recur(number, rootNode);
     return depthNumber;
         }
+        
+        
+        isBalanced(rootNode = this.root){
+            let heightLeft = this.height(rootNode.left.data);
+            let heightRight = this.height(rootNode.right.data);
+            if(heightLeft == heightRight){
+                return true
+            } else{
+                return false;
+            }
+        }
+        rebalance(rootNode = this.root){
+            let orderedArray = this.inorder();
+            this.root = buildTree(orderedArray);
+            return buildTree(orderedArray);
+        }
 }
 
 
@@ -284,4 +300,6 @@ console.log(myTree.preorder());
 console.log(myTree.postorder());
 console.log(myTree.height(6));
 console.log(myTree.depth(12));
+console.log(myTree.isBalanced());
 prettyPrint(myTree.root);
+prettyPrint(myTree.rebalance());
